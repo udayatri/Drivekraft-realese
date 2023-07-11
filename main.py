@@ -1,21 +1,18 @@
 from flask import Flask,render_template, request
 from flask_mysqldb import MySQL
 from db import connect,disconnect 
-
+from otp import sendotp,otpValueByUser
+import json
 
 app = Flask(__name__)
- 
 
-@app.route('/')
-def index():
-        obj=connect()
-        mycursor = obj.cursor(buffered=True)
-        sql="select * from activeTimes"
-        mycursor.execute(sql)
-        data=mycursor.fetchall() 
-        print(data)
-        disconnect(obj,mycursor)
-        return "Done"
+@app.route('/sendOtp', methods = ['GET', 'POST'])
+def sendOtp():
+        return sendotp()
+
+@app.route('/otpvaluebyUser', methods = ['GET', 'POST'])
+def otpvaluebyuser():
+        return otpValueByUser()
 
 if __name__ == "__main__":
    app.run()

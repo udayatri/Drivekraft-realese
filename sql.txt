@@ -1,0 +1,16 @@
+CREATE TABLE OTP(
+        id INT AUTOINCREMENT PRIMARY KEY,
+        user_contact CHAR(20),
+        otpvalue INT,
+        state CHAR(20),
+        created CHAR(20),
+        updated CHAR(20)
+        )
+
+ALTER TABLE otp ALTER COLUMN state SET DEFAULT 'OTP_SEND'
+
+ALTER TABLE otp MODIFY created varchar(50);
+
+ALTER TABLE otp MODIFY updated varchar(50);
+
+ALTER TABLE otp MODIFY state ENUM('OTP_SEND','WRONG_OTP','CORRECT_OTP');
